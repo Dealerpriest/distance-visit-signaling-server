@@ -29,7 +29,7 @@ server = express()
   // .use('/lib', (req, res) => {
   //   res.sendFile(path.join(__dirname, req.originalUrl));
   // })
-  .use((req, res) => res.sendFile(INDEX))
+  // .use((req, res) => res.sendFile(INDEX))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = socketIO(server);

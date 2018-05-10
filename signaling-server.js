@@ -15,16 +15,20 @@ console.log(
   "Hello! I'm the signaling server for handling webRTC connection in distance visit project \n-----------------------------------\n-----------------------------------"
 );
 
+console.log(
+  'ROBOT_TOKEN = ' + ROBOT_TOKEN + '\nCLIENT_TOKEN = ' + CLIENT_TOKEN
+);
+
 server = express()
-  .use('/camera', (req, res) => {
-    res.sendFile(path.join(__dirname, 'camera.html'));
-  })
-  .use('/js', (req, res) => {
-    res.sendFile(path.join(__dirname, req.originalUrl));
-  })
-  .use('/lib', (req, res) => {
-    res.sendFile(path.join(__dirname, req.originalUrl));
-  })
+  // .use('/camera', (req, res) => {
+  //   res.sendFile(path.join(__dirname, 'camera.html'));
+  // })
+  // .use('/js', (req, res) => {
+  //   res.sendFile(path.join(__dirname, req.originalUrl));
+  // })
+  // .use('/lib', (req, res) => {
+  //   res.sendFile(path.join(__dirname, req.originalUrl));
+  // })
   .use((req, res) => res.sendFile(INDEX))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 

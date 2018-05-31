@@ -166,7 +166,7 @@ io.on('connection', function(socket) {
       console.log('RTC ICE candidate from ' + socket.id);
       // console.log(msg)
       // console.log(if(msg.candidate){true;}else{true;});
-      if (msg.targetSocketId && msg.candidate) {
+      if (msg.targetSocketId && msg.candidate && clients[msg.targetSocketId]) {
         console.log('with target: ' + msg.targetSocketId);
         clients[msg.targetSocketId].emit('ice', data);
       } else if (msg.candidate) {

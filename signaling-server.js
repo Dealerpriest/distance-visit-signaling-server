@@ -152,7 +152,10 @@ io.on('connection', function(socket) {
       if (msg.answer) {
         robot.emit(
           'answer',
-          JSON.stringify({ fromSocketId: socket.id, answer: msg.answer })
+          JSON.stringify({
+            fromSocketId: socket.id,
+            answer: msg.answer
+          })
         );
       } else {
         console.error('Invalid answer received');
@@ -170,7 +173,7 @@ io.on('connection', function(socket) {
         console.log('with target: ' + msg.targetSocketId);
         clients[msg.targetSocketId].emit('ice', data);
       } else if (msg.candidate) {
-        console.log('without target');
+        console.log('without target (sending to robot)');
         robot.emit(
           'ice',
           JSON.stringify({ fromSocket: socket.id, candidate: msg.candidate })

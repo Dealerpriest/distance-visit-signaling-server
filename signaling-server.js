@@ -52,6 +52,7 @@ server = express()
 const io = socketIO(server);
 
 let robot = undefined;
+const maxNumClients = 1;
 let clients = {};
 
 io.use((socket, next) => {
@@ -94,7 +95,15 @@ io.on('connection', function(socket) {
         robot.emit('newClient', clients[key].id);
       });
     }
+    // CLIENT
   } else if (!clients[socket.id]) {
+    //Check for max limit
+    if (Object.keys(clients).length >= maxNumClients) {
+      socket.send('too many clients. You were rejected');
+      console.log('too many clients. Rejecting the client');
+      socket.disconnect();
+      return;
+    }
     socket.on('disconnect', () => {
       console.log('client disconnected: ' + socket.id);
       // let index = clients.indexOf(socket);

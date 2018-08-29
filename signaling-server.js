@@ -159,12 +159,15 @@ io.on('connection', function(socket) {
       console.log('RTC answer from ' + socket.id);
       // console.log(msg);
       if (msg.answer) {
+        msg.fromSocketId = socket.id;
         robot.emit(
           'answer',
-          JSON.stringify({
-            fromSocketId: socket.id,
-            answer: msg.answer
-          })
+          JSON.stringify(msg)
+          // JSON.stringify({
+          //   fromSocketId: socket.id,
+          //   answer: msg.answer,
+          //   mediaLabels: msg.mediaLabels
+          // })
         );
       } else {
         console.error('Invalid answer received');

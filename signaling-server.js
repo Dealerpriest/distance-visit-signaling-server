@@ -142,6 +142,7 @@ io.on('connection', function(socket) {
   socket.on('offer', data => {
     let msg;
     if ((msg = JSON.parse(data))) {
+    // if ((msg = necromancer.resurrect(data))) {
       console.log('RTC offer from ' + socket.id);
       // console.log(msg);
       if (msg.targetSocketId && msg.offer) {
@@ -156,6 +157,7 @@ io.on('connection', function(socket) {
   socket.on('answer', data => {
     let msg;
     if ((msg = JSON.parse(data))) {
+    // if ((msg = necromancer.resurrect(data))) {
       console.log('RTC answer from ' + socket.id);
       // console.log(msg);
       if (msg.answer) {
@@ -163,11 +165,7 @@ io.on('connection', function(socket) {
         robot.emit(
           'answer',
           JSON.stringify(msg)
-          // JSON.stringify({
-          //   fromSocketId: socket.id,
-          //   answer: msg.answer,
-          //   mediaLabels: msg.mediaLabels
-          // })
+          // necromancer.stringify(msg)
         );
       } else {
         console.error('Invalid answer received');
